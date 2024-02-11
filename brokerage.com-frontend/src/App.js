@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/Login';
 import SignUpSuccess from './pages/SignUpSuccess';
 import SignUpFailure from './pages/SignUpFailure';
+import PostPropety from './pages/PostProperty';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup/success" element={<SignUpSuccess/>} />
         <Route path="/signup/failure" element={<SignUpFailure/>} />
+        <Route path="/property/add" element={<PostPropety/>} />
       </Routes>
       <Footer />
     </div>

@@ -1,9 +1,6 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom/dist";
-import SignUpFailure from "./SignUpFailure";
-import SignUpSuccess from "./SignUpSuccess";
-
 
 function SignUp() {
   const navigate = useNavigate();
@@ -21,31 +18,27 @@ function SignUp() {
 
     if(data.get('user')=== 'Broker'){
       try {
-      const response = await axios.post(
+       await axios.post(
         "http://localhost:8080/brokers/signup",
         mybroker
       );
 
-      // <SignUpSuccess firstName={mybroker.firstName} lastName={mybroker.lastName}/>
-
+      
       navigate("/signup/success");
     } catch (error) {
-      // <SignUpFailure/>
       navigate("/signup/failure");
     }
     }
     else{
       try {
-        const response = await axios.post(
+        await axios.post(
           "http://localhost:8080/tenants/signup",
           mybroker
         );
   
-        // <SignUpSuccess firstName={mybroker.firstName} lastName={mybroker.lastName}/>
-  
+        
         navigate("/signup/success");
       } catch (error) {
-        // <SignUpFailure/>
         navigate("/signup/failure");
       }
       
@@ -56,15 +49,6 @@ function SignUp() {
   }
   return (
     <>
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
-
 
 
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
