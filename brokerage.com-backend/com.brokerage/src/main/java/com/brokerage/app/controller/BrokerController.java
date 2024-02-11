@@ -40,9 +40,17 @@ public class BrokerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
         }
     }
-
     @PostMapping("/signup")
     public ResponseEntity<?> addNewBroker(@RequestBody @Valid BrokerDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(brokerService.addNewBroker(dto));
+    }
+
+    @PutMapping("/{mobile}/{newPass}")
+    public ResponseEntity<?> changePassword(@PathVariable Long mobile, @PathVariable String newPass){
+
+        if(brokerService.changePassword(mobile,newPass) == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Broker not found for mobile number: " + mobile);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Password Updated Successfully!!!");
     }
 }

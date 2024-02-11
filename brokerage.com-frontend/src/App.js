@@ -9,6 +9,10 @@ import LogIn from './pages/Login';
 import SignUpSuccess from './pages/SignUpSuccess';
 import SignUpFailure from './pages/SignUpFailure';
 import PostPropety from './pages/PostProperty';
+import ForgotPassword from './pages/ForgotPassword';
+import ChangePassword from './pages/ChangePassword';
+import ChangePassWordFailure from './pages/ChangePassWordFailure';
+import ChangePasswordSuccess from './pages/ChangePasswordSuccess';
 
 const App = () => {
   return (
@@ -23,6 +27,10 @@ const App = () => {
         <Route path="/signup/success" element={<SignUpSuccess/>} />
         <Route path="/signup/failure" element={<SignUpFailure/>} />
         <Route path="/property/add" element={<PostPropety/>} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/change-password" element={<ChangePassword/>} />
+        <Route path="/change-password/success" element={<ChangePasswordSuccess/>} />
+        <Route path="/change-password/failure" element={<ChangePassWordFailure/>} />
       </Routes>
       <Footer />
     </div>

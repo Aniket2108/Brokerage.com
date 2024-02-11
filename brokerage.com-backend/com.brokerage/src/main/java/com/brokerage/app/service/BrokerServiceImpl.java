@@ -47,4 +47,18 @@ public class BrokerServiceImpl implements BrokerService{
         }
         return mapper.map(broker, BrokerDTOResponse.class);
     }
+
+    @Override
+    public String changePassword(Long mobile, String newPass) {
+        Broker broker;
+        try{
+            broker = brokerRepo.findById(mobile).orElseThrow(()->new BrokerNotFoundException("No broker found with mobile number:"+mobile));
+            broker.setPassword(newPass);
+            brokerRepo.save(broker);
+        }
+        catch (BrokerNotFoundException exception) {
+            return null;
+        }
+        return "Success";
+    }
 }

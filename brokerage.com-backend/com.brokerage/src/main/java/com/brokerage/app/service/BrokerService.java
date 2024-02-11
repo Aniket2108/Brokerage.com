@@ -12,4 +12,6 @@ public interface BrokerService {
     BrokerDTOResponse addNewBroker(BrokerDTO broker);
 
     BrokerDTOResponse getBrokerByMobileNumber(Long mobile) throws BrokerNotFoundException;
+
+    String changePassword(Long mobile,String newPass);
 }
