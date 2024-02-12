@@ -39,7 +39,7 @@ const Pricing = () => {
               price="₹499"
               subscription="year"
               description="Perfect for using in a personal website or a client project."
-              buttonText="Choose Business"
+              buttonText="Buy Gold"
               active
             >
               <List>Login from 4 Devices</List>
@@ -54,7 +54,7 @@ const Pricing = () => {
               price="₹999"
               subscription="year"
               description="Perfect for using in a personal website or a client project."
-              buttonText="Choose Professional"
+              buttonText="Buy Platinum"
             >
               <List>Login from 8 Devices</List>
               <List>All UI components</List>

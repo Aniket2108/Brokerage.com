@@ -7,5 +7,9 @@ import com.brokerage.app.dto.TenantDTOResponse;
 public interface TenantService {
     TenantDTOResponse addNewTenant(TenantDTO tenant);
 
-    TenantDTOResponse getBrokerByMobileNumber(Long mobile) throws TenantNotFoundException;
+    String changePassword(Long mobile,String newPass);
+
+    Boolean tenantLogin(Long mobile,String password);
+
+    TenantDTOResponse getTenantByMobileNumber(Long mobile) throws TenantNotFoundException;
 }

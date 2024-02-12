@@ -45,6 +45,11 @@ public class BrokerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(brokerService.addNewBroker(dto));
     }
 
+    @GetMapping("/{mobile}/{password}")
+    public ResponseEntity<?> brokerLogin(@PathVariable Long mobile,@PathVariable String password){
+            return ResponseEntity.status((HttpStatus.OK)).body(brokerService.brokerLogin(mobile,password));
+    }
+
     @PutMapping("/{mobile}/{newPass}")
     public ResponseEntity<?> changePassword(@PathVariable Long mobile, @PathVariable String newPass){
 

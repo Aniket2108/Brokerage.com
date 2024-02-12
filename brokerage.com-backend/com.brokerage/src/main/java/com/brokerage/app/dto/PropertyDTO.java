@@ -33,4 +33,7 @@ public class PropertyDTO {
 
     @JsonProperty(value = "surface")
     private int surface;
+
+    @JsonProperty(value = "images")
+    private String images;
 }

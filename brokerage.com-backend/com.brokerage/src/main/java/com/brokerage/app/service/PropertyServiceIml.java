@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class PropertyServiceIml implements PropertyService{
     @Override
     public PropertyDTOResponse addNewProperty(PropertyDTO dto) {
         Property propertyEntity = mapper.map(dto,Property.class);
+        System.out.println(dto.getImages());
         propertyRepo.save(propertyEntity);
         return mapper.map(propertyEntity,PropertyDTOResponse.class);
     }

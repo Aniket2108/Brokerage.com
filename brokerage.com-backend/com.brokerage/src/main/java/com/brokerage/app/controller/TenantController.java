@@ -20,7 +20,7 @@ public class TenantController {
     @GetMapping("/{mobile}")
     public ResponseEntity<?> getTenantByMobileNumber(@PathVariable Long mobile){
         try {
-            TenantDTOResponse tenant = tenantService.getBrokerByMobileNumber(mobile);
+            TenantDTOResponse tenant = tenantService.getTenantByMobileNumber(mobile);
             if (tenant == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant not found for mobile number: " + mobile);
             }
@@ -34,4 +34,19 @@ public class TenantController {
     public ResponseEntity<?> addNewBroker(@RequestBody @Valid TenantDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(tenantService.addNewTenant(dto));
     }
+
+    @GetMapping("/{mobile}/{password}")
+    public ResponseEntity<?> tenantLogin(@PathVariable Long mobile,@PathVariable String password){
+        return ResponseEntity.status((HttpStatus.OK)).body(tenantService.tenantLogin(mobile,password));
+    }
+
+    @PutMapping("/{mobile}/{newPass}")
+    public ResponseEntity<?> changePassword(@PathVariable Long mobile, @PathVariable String newPass){
+
+        if(tenantService.changePassword(mobile,newPass) == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant not found for mobile number: " + mobile);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("Password Updated Successfully!!!");
+    }
+
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")
     private Long id;
 
@@ -43,4 +43,7 @@ public class Property {
     @Column(length = 100,name = "property_description")
     private String description;
 
+//    @Lob
+//    @Column(name = "images")
+//    private byte[] images;
 }

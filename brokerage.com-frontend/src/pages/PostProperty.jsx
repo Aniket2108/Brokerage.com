@@ -11,11 +11,11 @@ export default function PostProperty() {
         const formData = new FormData(event.target);
 
         // Ensure at least 3 images are selected
-        if (selectedImages.length < 3) {
-            alert('Please select at least 3 images.');
-            setSelectedImages([]);
-            return;
-        }
+        // if (selectedImages.length < 3) {
+        //     alert('Please select at least 3 images.');
+        //     setSelectedImages([]);
+        //     return;
+        // }
         
         if (selectedImages.length > 5) {
             alert('You can upload at most 5 images.');
@@ -47,6 +47,16 @@ export default function PostProperty() {
         catch(error){
             console.log(error);
         }
+        // try{
+        //     const property = await axios.get(
+        //                   "http://localhost:8080/property/"
+        //                 )
+        //             console.log(property);
+        //             <img src={property.data}></img>
+        // }
+        // catch(err){
+        //     console.log(err);
+        // }
     };
 
 
@@ -209,9 +219,9 @@ export default function PostProperty() {
                                 type="file"
                                 id="imageSection"
                                 accept="image/*"
-                                multiple
+                                // multiple
                                 required
-                                onChange={handleImageChange}
+                                // onChange={handleImageChange}
                                 className="block w-full rounded-md border resize-none hover:border-violet-500 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <p className="text-sm text-gray-500 mt-2">

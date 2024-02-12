@@ -1,9 +1,11 @@
 package com.brokerage.app.service;
 
 import com.brokerage.app.custom_exceptions.BrokerNotFoundException;
+import com.brokerage.app.custom_exceptions.TenantNotFoundException;
 import com.brokerage.app.dto.BrokerDTO;
 import com.brokerage.app.dto.BrokerDTOResponse;
 import com.brokerage.app.entities.Broker;
+import com.brokerage.app.entities.Tenant;
 import com.brokerage.app.repository.BrokerRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -60,5 +62,20 @@ public class BrokerServiceImpl implements BrokerService{
             return null;
         }
         return "Success";
+    }
+
+    @Override
+    public Boolean brokerLogin(Long mobile, String password) {
+        Broker broker;
+        try{
+            broker = brokerRepo.findById(mobile).orElseThrow(()->new TenantNotFoundException("No broker found with mobile number:"+mobile));
+            if(!broker.getPassword().equals(password)){
+                return false;
+            }
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
     }
 }

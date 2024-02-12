@@ -28,7 +28,37 @@ public class TenantServiceImpl implements TenantService{
     }
 
     @Override
-    public TenantDTOResponse getBrokerByMobileNumber(Long mobile) throws TenantNotFoundException {
+    public String changePassword(Long mobile, String newPass) {
+        Tenant tenant;
+        try{
+            tenant = tenantRepo.findById(mobile).orElseThrow(()->new TenantNotFoundException("No tenant found with mobile number:"+mobile));
+            tenant.setPassword(newPass);
+            tenantRepo.save(tenant);
+        }
+        catch (TenantNotFoundException exception) {
+            return null;
+        }
+        return "Success";
+    }
+
+
+    @Override
+    public Boolean tenantLogin(Long mobile, String password) {
+        Tenant tenant;
+        try{
+            tenant = tenantRepo.findById(mobile).orElseThrow(()->new TenantNotFoundException("No tenant found with mobile number:"+mobile));
+            if(!tenant.getPassword().equals(password)){
+                return false;
+            }
+        }
+        catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public TenantDTOResponse getTenantByMobileNumber(Long mobile) throws TenantNotFoundException {
         Tenant tenant;
         try{
             tenant = tenantRepo.findById(mobile).orElseThrow(()->new TenantNotFoundException("No tenant found with mobile number:"+mobile));
@@ -38,4 +68,6 @@ public class TenantServiceImpl implements TenantService{
         }
         return mapper.map(tenant,TenantDTOResponse.class);
     }
+
+
 }
