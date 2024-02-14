@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomMapper {
-	
-	 @Autowired
-	    private ByteToMultipartFileConverter byteToMultipartFileConverter;
+
+    @Autowired
+    private ByteToMultipartFileConverter byteToMultipartFileConverter;
 
     public UserDTO mapUserToDTO(User user) {
         UserDTO userDTO = new UserDTO();
@@ -35,11 +35,11 @@ public class CustomMapper {
         user.setContactNumber(userDTO.getUserContactNumber());
         user.setProfilePicture(userDTO.getUserProfilePicture());
         user.setPropertiesLeft(userDTO.getPropertiesLeft());
-        
+
         return user;
     }
-    
-    public UserResponseDTO mapDTOToUserResponce(UserDTO userDTO) {
+
+    public UserResponseDTO mapDTOToUserResponse(UserDTO userDTO) {
         UserResponseDTO user = new UserResponseDTO();
         user.setUserId(userDTO.getUserId());
         user.setUserEmail(userDTO.getUserEmail());
@@ -51,4 +51,5 @@ public class CustomMapper {
         return user;
     }
 }
+
 

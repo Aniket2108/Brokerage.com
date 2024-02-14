@@ -30,14 +30,14 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	
+
 	@GetMapping("/all")
 	public ResponseEntity<?> getAllUsers(){
 		return ResponseEntity.ok(userService.getAllUsers()) ;
 	}
-	
+
 	@PostMapping(value = "/register",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO, @RequestPart("userProfilePicture") MultipartFile userProfilePicture) throws Exception {
+	public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO,@RequestPart("userProfilePicture") MultipartFile userProfilePicture) throws Exception {
 
 		UserDTO newUser = userService.addUser(userDTO,userProfilePicture);
 		if (newUser != null) {
@@ -50,6 +50,7 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@RequestBody UserLoginRequest loginRequest) {
 		UserDTO user = userService.loginUser(loginRequest.getMobileNumber(), loginRequest.getPassword());
+		System.out.println(user);
 		if (user != null) {
 			System.out.println(user);
 			return ResponseEntity.ok(user);
@@ -59,13 +60,13 @@ public class UserController {
 	}
 
 	@PutMapping("/{userId}")
-    public ResponseEntity<?> updateUserProfile(@PathVariable Integer userId,
-                                                   @RequestParam("userName") String userName,
-                                                   @RequestParam("userEmail") String userEmail,
-                                                   @RequestParam("userProfilePicture") MultipartFile userProfilePicture) throws IOException {
-       UserDTO userDTO = userService.updateUser(userId, userName,userEmail,userProfilePicture);
-       		System.out.println(userDTO);
-			return ResponseEntity.ok(userDTO);
-		
-}
+	public ResponseEntity<?> updateUserProfile(@PathVariable Integer userId,
+											   @RequestParam("userName") String userName,
+											   @RequestParam("userEmail") String userEmail,
+											   @RequestParam("userProfilePicture") MultipartFile userProfilePicture) throws IOException {
+		UserDTO userDTO = userService.updateUser(userId, userName,userEmail,userProfilePicture);
+		System.out.println(userDTO);
+		return ResponseEntity.ok(userDTO);
+
+	}
 }

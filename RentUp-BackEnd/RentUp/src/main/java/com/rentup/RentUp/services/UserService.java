@@ -9,10 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public interface UserService {
-    UserDTO addUser(UserDTO userDTO, MultipartFile userProfilePicture);
-    UserDTO loginUser(String mobileNumber, String password);
-	//boolean changePassword(ChangePasswordRequest request);
-	
+	UserDTO addUser(UserDTO userDTO, MultipartFile userProfilePicture);
+	UserDTO loginUser(String mobileNumber, String password);
+
 	User findById(Integer userId);
 	UserDTO updateUser(Integer userId, String userName, String userEmail, MultipartFile userProfilePicture) throws IOException;
 	List<UserDTO> getAllUsers();

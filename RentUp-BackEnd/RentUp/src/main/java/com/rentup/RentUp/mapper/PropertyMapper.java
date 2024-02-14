@@ -1,8 +1,11 @@
 package com.rentup.RentUp.mapper;
 
 import com.rentup.RentUp.dto.PropertyDTO;
+import com.rentup.RentUp.entities.FlatType;
 import com.rentup.RentUp.entities.Property;
 import com.rentup.RentUp.entities.PropertyStatus;
+import com.rentup.RentUp.entities.TenantType;
+import com.rentup.RentUp.request.PropertyRequest;
 import org.springframework.stereotype.Component;
 
 
@@ -13,10 +16,13 @@ public class PropertyMapper {
         PropertyDTO propertyDTO = new PropertyDTO();
         propertyDTO.setPropertyId(property.getPropertyId());
         propertyDTO.setPropertyImages(property.getPropertyImages());
-        propertyDTO.setPropertyAddress(property.getAddress());
+        propertyDTO.setAddress(property.getAddress());
         propertyDTO.setAreaId(property.getArea());
         propertyDTO.setUserId(property.getUser());
-        propertyDTO.setPropertyStatus(property.getStatus().name().toUpperCase());
+        propertyDTO.setTenantType(property.getTenantType());
+        propertyDTO.setFlatType(property.getFlatType());
+        propertyDTO.setCarpetArea(property.getCarpet_area());
+        propertyDTO.setStatus(property.getStatus());
         return propertyDTO;
     }
 
@@ -24,11 +30,40 @@ public class PropertyMapper {
         Property property = new Property();
         property.setPropertyId(propertyDTO.getPropertyId());
         property.setPropertyImages(propertyDTO.getPropertyImages());
-        property.setAddress(propertyDTO.getPropertyAddress());
+        property.setAddress(propertyDTO.getAddress());
         property.setArea(propertyDTO.getAreaId());
         property.setUser(propertyDTO.getUserId());
-        property.setStatus(PropertyStatus.valueOf(propertyDTO.getPropertyStatus().toUpperCase()));
+        property.setTenantType(propertyDTO.getTenantType());
+        property.setCarpet_area(propertyDTO.getCarpetArea());
+        property.setFlatType(propertyDTO.getFlatType());
+        property.setStatus(propertyDTO.getStatus());
         return property;
+    }
+
+    public static Property mapRequestToEntity(PropertyRequest request) {
+        Property property = new Property();
+        property.setPropertyId(request.getPropertyId());
+        property.setPropertyImages(request.getPropertyImages());
+        property.setAddress(request.getAddress());
+        property.setCarpet_area(request.getArea());
+        property.setStatus(PropertyStatus.valueOf("AVAILABLE"));
+        property.setTenantType(Enum.valueOf(TenantType.class, request.getTenantType()));
+        property.setFlatType(Enum.valueOf(FlatType.class, request.getFlatType()));
+        return property;
+    }
+
+    public static PropertyRequest mapEntityToRequest(Property entity) {
+        PropertyRequest request = new PropertyRequest();
+        request.setPropertyId(entity.getPropertyId());
+        request.setPropertyImages(entity.getPropertyImages());
+        request.setAddress(entity.getAddress());
+        request.setAreaId(entity.getArea().getAreaId());
+        request.setUserId(entity.getUser().getUserId());
+        request.setStatus(entity.getStatus().toString());
+        request.setArea(entity.getCarpet_area());
+        request.setTenantType(entity.getTenantType().name());
+        request.setFlatType(entity.getFlatType().name());
+        return request;
     }
 }
 

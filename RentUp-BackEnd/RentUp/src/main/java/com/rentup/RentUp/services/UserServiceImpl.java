@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
             try {
                 // Convert the MultipartFile to byte[]
                 byte[] imageData = userProfilePicture.getBytes();
-                
+
                 // Set the image data in the User entity
                 user.setProfilePicture(imageData);
             } catch (IOException e) {
@@ -45,17 +45,17 @@ public class UserServiceImpl implements UserService {
         return customMapper.mapUserToDTO(savedUser);
     }
 
-
     @Override
     public UserDTO loginUser(String mobileNumber, String password) {
         User user = userRepository.findByContactNumber(mobileNumber);
+
         if (user != null && passwordEncoder.verifyPassword(password, user.getPassword())) {
             return customMapper.mapUserToDTO(user);
         }
         return null; // Login failed
     }
-    
-    
+
+
 //	@Override
 //    public boolean changePassword(ChangePasswordRequest request) {
 //        // Retrieve the user by userId
@@ -80,36 +80,36 @@ public class UserServiceImpl implements UserService {
 //        return true;
 //    }
 
-	
 
-	@Override
-	public User findById(Integer userId) {
-		
-		return userRepository.findById(userId).orElseThrow();
-	}
 
-	@Override
-	public UserDTO updateUser(Integer userId, String userName, String userEmail, MultipartFile userProfilePicture)  {
-User user = userRepository.findById(userId).orElseThrow();
-		
-		user.setEmail(userEmail);
-		user.setName(userName);
-		byte[] userProfilePictureBytes=null;
-		try {
-			userProfilePictureBytes = userProfilePicture.getBytes();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+    @Override
+    public User findById(Integer userId) {
+
+        return userRepository.findById(userId).orElseThrow();
+    }
+
+    @Override
+    public UserDTO updateUser(Integer userId, String userName, String userEmail, MultipartFile userProfilePicture)  {
+        User user = userRepository.findById(userId).orElseThrow();
+
+        user.setEmail(userEmail);
+        user.setName(userName);
+        byte[] userProfilePictureBytes=null;
+        try {
+            userProfilePictureBytes = userProfilePicture.getBytes();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
         user.setProfilePicture(userProfilePictureBytes);
         return  customMapper.mapUserToDTO(userRepository.save(user));
-		
-	}
 
-	@Override
-	public List<UserDTO> getAllUsers() {
-		List<User> users = userRepository.findAll();
-		List<UserDTO> userDTOList = users.stream().map(user->customMapper.mapUserToDTO(user)).toList();
-		return userDTOList;
-	}
+    }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOList = users.stream().map(user->customMapper.mapUserToDTO(user)).toList();
+        return userDTOList;
+    }
 }

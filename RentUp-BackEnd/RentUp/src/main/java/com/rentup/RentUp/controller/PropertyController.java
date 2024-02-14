@@ -3,24 +3,34 @@ package com.rentup.RentUp.controller;
 import java.util.List;
 
 import com.rentup.RentUp.dto.PropertyDTO;
+import com.rentup.RentUp.request.PropertyRequest;
 import com.rentup.RentUp.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
 @RequestMapping("/properties")
-@CrossOrigin
 public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
     @GetMapping
-    public ResponseEntity<?> getAllProperties() {
+    public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         List<PropertyDTO> properties = propertyService.getAllProperties();
         return new ResponseEntity<>(properties, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/add")
+    public ResponseEntity<?> addProperty(@RequestBody PropertyRequest propertyRequest,
+                                         @RequestParam(value = "images" , required = false) List<MultipartFile> images) {
+        System.out.println(propertyRequest);
+        PropertyDTO addedProperty = propertyService.addProperty(propertyRequest, images);
+        System.out.println(addedProperty);
+        return ResponseEntity.ok(addedProperty);
     }
 
     @GetMapping("/{id}")

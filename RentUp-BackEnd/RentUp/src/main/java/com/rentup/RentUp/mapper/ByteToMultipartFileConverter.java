@@ -45,35 +45,36 @@ public class ByteToMultipartFileConverter {
             return "application/octet-stream"; // Example content type for binary files
         }
 
-		@Override
-		public boolean isEmpty() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+        @Override
+        public boolean isEmpty() {
+            // TODO Auto-generated method stub
+            return false;
+        }
 
-		@Override
-		public long getSize() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+        @Override
+        public long getSize() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
 
-		@Override
-		public byte[] getBytes() throws IOException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+        @Override
+        public byte[] getBytes() throws IOException {
+            // TODO Auto-generated method stub
+            return null;
+        }
 
-		@Override
-		public InputStream getInputStream() throws IOException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+        @Override
+        public InputStream getInputStream() throws IOException {
+            // TODO Auto-generated method stub
+            return null;
+        }
 
-		@Override
-		public void transferTo(File dest) throws IOException, IllegalStateException {
-			// TODO Auto-generated method stub
-			
-		}
+        @Override
+        public void transferTo(File dest) throws IOException, IllegalStateException {
+            // TODO Auto-generated method stub
+
+        }
+
     }
 }
 

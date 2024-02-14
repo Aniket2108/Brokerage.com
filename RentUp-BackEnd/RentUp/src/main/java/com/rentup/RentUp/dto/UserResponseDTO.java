@@ -6,18 +6,14 @@ import lombok.Data;
 
 @Data
 public class UserResponseDTO {
-	
-	    private Integer userId;
-	    private String userEmail;
-	    private String userPassword;
-	    private String userName;
-	    private String userContactNumber;
-	    private MultipartFile userProfilePicture;
-	    private Integer propertiesLeft;
 
-	    // Constructors, getters, and setters
-	
-
+	private Integer userId;
+	private String userEmail;
+	private String userPassword;
+	private String userName;
+	private String userContactNumber;
+	private MultipartFile userProfilePicture;
+	private Integer propertiesLeft;
 
 
 }

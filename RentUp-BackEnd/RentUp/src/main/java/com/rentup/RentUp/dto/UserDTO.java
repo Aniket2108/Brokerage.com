@@ -13,7 +13,6 @@ public class UserDTO {
     private Integer propertiesLeft;
     
 
-    // Constructors, getters, and setters
 }
 
 
