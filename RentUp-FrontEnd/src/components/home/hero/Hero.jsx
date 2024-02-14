@@ -46,7 +46,7 @@ const Hero = () => {
 
           <form className='flex'>
             <div className='box'>
-              <span>City/Street</span>
+              <span>City</span>
               <select
                 value={city}
                 onChange={(e) => handleCityChange(e.target.value)}
