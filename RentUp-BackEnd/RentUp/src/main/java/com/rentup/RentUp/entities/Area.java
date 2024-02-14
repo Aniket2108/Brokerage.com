@@ -14,11 +14,6 @@ import lombok.*;
 @Entity
 @Data
 @Table(name = "area")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Area {
 
     @Id

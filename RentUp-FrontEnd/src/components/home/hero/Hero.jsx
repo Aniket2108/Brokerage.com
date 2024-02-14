@@ -1,69 +1,100 @@
-import React, { useState } from "react"
-import Heading from "../../common/Heading"
-import "./hero.css"
+import React, { useEffect, useState } from "react";
+import Heading from "../../common/Heading";
+import "./hero.css";
+import axios from "axios";
 
 const Hero = () => {
+  const [location, setLocation] = useState("");
+  const [locations, setLocations] = useState([]);
+  const [areas, setArea] = useState([]);
+  const [city, setCity] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [priceRange, setPriceRange] = useState("");
 
-  const [area, setArea] = useState('');
-  const [city, setCity] = useState('');
-  const [propertyType, setPropertyType] = useState('');
-  const [priceRange, setPriceRange] = useState('');
-
-  const propertyTypes = ['House', 'Apartment', 'Condo', 'Land'];
-  const location = ['Pune', 'Mumbai'];
-  const areas = ['Pashan','Aundh'];
+  const propertyTypes = ["House", "Apartment", "Condo", "Land"];
   const prices = [
     {
       value: "100000 - 130000",
     },
     {
-      value: '130000 - 160000',
+      value: "130000 - 160000",
     },
     {
-      value: '160000 - 190000',
+      value: "160000 - 190000",
     },
     {
-      value: '190000 - 220000',
+      value: "190000 - 220000",
     },
     {
-      value: '10000 - 30000',
+      value: "10000 - 30000",
     },
     {
-      value: '30000 - 40000',
+      value: "30000 - 40000",
     },
   ];
 
-  const handleAreaChange = (event) => setArea(event.target.value);
-  const handleCityChange = (event) => setCity(event.target.value);
-  const handlePropertyTypeSelect = (selectedType) => setPropertyType(selectedType);
-  const handlePriceRangeSelect = (selectedRange) => setPriceRange(selectedRange);
+  const handleAreaChange = (event) => setArea([event.target.value]);
+  const handleCityChange = (event) => {
+    const selectedCity = event.target.value;
+    setCity(selectedCity);
+    fetchAreas(selectedCity);
+  };
+  const handlePropertyTypeSelect = (selectedType) =>
+    setPropertyType(selectedType);
+  const handlePriceRangeSelect = (selectedRange) =>
+    setPriceRange(selectedRange);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/city/");
+        setLocations(response.data);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+
+  const fetchAreas = async (selectedCity) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/area/${selectedCity}`
+      );
+      setArea(response.data);
+    } catch (error) {
+      console.error("Error fetching areas:", error);
+    }
+  };
 
   return (
     <>
-      <section className='hero'>
-        <div className='container'>
-          <Heading title='Search Your Next Home ' subtitle='Find new & featured property located in your local city.' />
+      <section className="hero">
+        <div className="container">
+          <Heading
+            title="Search Your Next Home "
+            subtitle="Find new & featured property located in your local city."
+          />
 
-          <form className='flex'>
-            <div className='box'>
+          <form className="flex">
+            <div className="box">
               <span>City</span>
-              <select
-                value={city}
-                onChange={(e) => handleCityChange(e.target.value)}
-              >
-                {location.map((city, index) => (
+              <select value={city} onChange={handleCityChange}>
+              <option>Select City
+                  </option>
+                {locations.map((city, index) => (
                   <option key={index} value={city}>
                     {city}
                   </option>
                 ))}
               </select>
             </div>
-            <div className='box'>
+            <div className="box">
               <span>Area</span>
-              <select
-                value={area}
-                onChange={(e) => handleAreaChange(e.target.value)}
-              >
+              <select value={areas} onChange={handleAreaChange}>
+              <option>Select Area
+                  </option>
                 {areas.map((area, index) => (
                   <option key={index} value={area}>
                     {area}
@@ -71,7 +102,7 @@ const Hero = () => {
                 ))}
               </select>
             </div>
-            <div className='box'>
+            <div className="box">
               <span>Property Type</span>
               <select
                 value={propertyType}
@@ -84,8 +115,8 @@ const Hero = () => {
                 ))}
               </select>
             </div>
-            
-            <div className='box'>
+
+            <div className="box">
               <span>Price Range</span>
               <select
                 value={priceRange}
@@ -98,14 +129,14 @@ const Hero = () => {
                 ))}
               </select>
             </div>
-            <button className='btn1'>
-              <i className='fa fa-search'></i>
+            <button className="btn1">
+              <i className="fa fa-search"></i>
             </button>
           </form>
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

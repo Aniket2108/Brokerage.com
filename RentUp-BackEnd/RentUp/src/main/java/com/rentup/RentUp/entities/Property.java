@@ -17,11 +17,6 @@ import lombok.*;
 @Entity
 @Data
 @Table(name = "properties")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Property {
     
     @Id

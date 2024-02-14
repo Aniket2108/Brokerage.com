@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import "./Login.css"; // Import your CSS file
+import { useUser } from "../common/UserProvider"; // Import useUser hook from context
 
 const Login = () => {
+  const { setUser } = useUser(); // Get setUser function from context
   const [formData, setFormData] = useState({
     mobileNumber: "",
     password: "",
   });
 
   const [errors, setErrors] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false); // Define loggedIn state
   const [showButtons, setShowButtons] = useState(true);
   const [backendError, setBackendError] = useState("");
   const history = useHistory();
@@ -41,11 +42,11 @@ const Login = () => {
     if (isValid) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/user/login",
+          "http://localhost:8080/users/login",
           formData
         );
         console.log("Form submitted:", response.data);
-        setLoggedIn(true); // Update loggedIn state
+        setUser(response.data); // Set user state after successful login
         setShowButtons(false); // Hide login and signup buttons
         // Redirect user to home page after successful login
         history.push("/");

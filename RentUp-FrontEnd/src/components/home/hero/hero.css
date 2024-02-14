@@ -49,15 +49,15 @@ form h4 {
   font-weight: 500;
 }
 
-/* Add this to your hero.css or create a separate CSS file */
+
 .box {
-  margin-bottom: 10px; /* Adjust the margin as needed */
+  margin-bottom: 10px; 
   display: flex;
   flex-direction: column;
 }
 
 .box span {
-  margin-bottom: 5px; /* Adjust the margin as needed */
+  margin-bottom: 5px; 
 }
 
 select {

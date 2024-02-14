@@ -11,11 +11,6 @@ import lombok.*;
 @Entity
 @Data
 @Table(name = "city")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class City {
 
     @Id

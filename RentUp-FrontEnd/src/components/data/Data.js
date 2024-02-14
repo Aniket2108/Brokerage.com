@@ -1,5 +1,34 @@
-export const nav = [
-  {
+// export const nav = [
+//   {
+//     text: "home",
+//     path: "/",
+//   },
+//   {
+//     text: "about",
+//     path: "/about",
+//   },
+//   {
+//     text: "services",
+//     path: "/services",
+//   },
+//   {
+//     text: "blog",
+//     path: "/blog",
+//   },
+//   {
+//     text: "pricing",
+//     path: "/pricing",
+//   },
+//   {
+//     text: "contact",
+//     path: "/contact",
+//   },
+    
+// ]
+
+export const getNavData = (user) => {
+  const navData = [
+      {
     text: "home",
     path: "/",
   },
@@ -23,7 +52,17 @@ export const nav = [
     text: "contact",
     path: "/contact",
   },
-]
+  {
+    text: "add property",
+    path: "/property",
+  },
+    // Your other navigation items here
+    { text: user ? 'Logout' : 'Login', path: user? '/logout':'/login'},
+    { text:user? 'Profile':'Sign up', path: user?'/profile':'/signup' },
+  ];
+
+  return navData;
+};
 export const featured = [
   {
     cover: "../images/hero/h1.png",
@@ -302,6 +341,21 @@ export const price = [
     ],
   },
 ]
+// export const footer = [
+//   {
+//     title: "LAYOUTS",
+//     text: [{ list: "Home Page" }, { list: "About Page" }, { list: "Service Page" }, { list: "Property Page" }, { list: "Contact Page" }, { list: "Single Blog" }],
+//   },
+//   {
+//     title: "ALL SECTIONS",
+//     text: [{ list: "Headers" }, { list: "Features" }, { list: "Attractive" }, { list: "Testimonials" }, { list: "Videos" }, { list: "Footers" }],
+//   },
+//   {
+//     title: "COMPANY",
+//     text: [{ list: "About" }, { list: "Blog" }, { list: "Pricing" }, { list: "Affiliate" }, { list: "Login" }, { list: "Changelog" }],
+//   },
+// ]
+
 export const footer = [
   {
     title: "LAYOUTS",
@@ -315,4 +369,52 @@ export const footer = [
     title: "COMPANY",
     text: [{ list: "About" }, { list: "Blog" }, { list: "Pricing" }, { list: "Affiliate" }, { list: "Login" }, { list: "Changelog" }],
   },
-]
+];
+
+export const socialMediaLinks = [
+  { platform: "Facebook", link: "https://www.facebook.com/yourpage" },
+  { platform: "Twitter", link: "https://twitter.com/yourpage" },
+  { platform: "Instagram", link: "https://www.instagram.com/yourpage" },
+  // Add more social media platforms and their links as needed
+];
+
+export const teamMembers = [
+    {
+      name: "John Doe",
+      prn: "PRN123",
+      college: "ABC University",
+      profilePicture: "../images/customer/team-1.jpg",
+    },
+    {
+      name: "Jane Smith",
+      prn: "PRN456",
+      college: "XYZ College",
+      profilePicture: "../images/customer/team-2.jpg",
+    },
+    // Add details of other team members as needed
+  ];
+
+  export const citiesData = [
+    { id: 1, name: "Pune" },
+    { id: 2, name: "Mumbai" },
+    // Add more cities as needed
+  ];
+  
+  export const areasData = {
+    "Pune": [
+      { id: 1, name: "Pashan" },
+      { id: 2, name: "Baner" },
+      // Add more areas in City A as needed
+    ],
+    "Mumbai": [
+      { id: 1, name: "churgate" },
+      { id: 2, name: "Andheri" },
+      // Add more areas in City B as needed
+    ],
+    // Add more cities and their respective areas as needed
+  };
+  
+
+
+
+

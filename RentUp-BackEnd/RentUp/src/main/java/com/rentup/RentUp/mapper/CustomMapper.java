@@ -1,7 +1,7 @@
 package com.rentup.RentUp.mapper;
 
 import com.rentup.RentUp.dto.UserDTO;
-import com.rentup.RentUp.dto.UserResponceDTO;
+import com.rentup.RentUp.dto.UserResponseDTO;
 import com.rentup.RentUp.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,8 +39,8 @@ public class CustomMapper {
         return user;
     }
     
-    public UserResponceDTO mapDTOToUserResponce(UserDTO userDTO) {
-        UserResponceDTO user = new UserResponceDTO();
+    public UserResponseDTO mapDTOToUserResponce(UserDTO userDTO) {
+        UserResponseDTO user = new UserResponseDTO();
         user.setUserId(userDTO.getUserId());
         user.setUserEmail(userDTO.getUserEmail());
         user.setUserPassword(userDTO.getUserPassword());

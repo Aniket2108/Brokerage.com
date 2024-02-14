@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import "./header.css";
-import { nav } from "../../data/Data";
 import { Link } from "react-router-dom";
+import { useUser } from "../UserProvider"; // Import useUser hook from context
+import { getNavData } from "../../data/Data"; // Import getNavData function
+import { useHistory } from "react-router-dom"; // Import useHistory hook to redirect
 
 const Header = () => {
+  const { user, setUser } = useUser(); // Get user and setUser function from context
   const [navList, setNavList] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false); // Add state for tracking login status
+  const history = useHistory(); // Initialize useHistory hook
 
-  const handleLogin = () => {
-    // Logic for handling login
-    setLoggedIn(true);
-  };
+  const navData = getNavData(user); // Get navigation data based on user login state
 
+  // Function to handle logout
   const handleLogout = () => {
-    // Logic for handling logout
-    setLoggedIn(false);
+    // Clear user data
+    setUser(null);
+    // Redirect to home page
+    history.push("/");
   };
 
   return (
@@ -26,39 +29,25 @@ const Header = () => {
           </div>
           <div className="nav">
             <ul className={navList ? "small" : "flex"}>
-              {nav.map((list, index) => (
+              {navData.map((item, index) => (
                 <li key={index}>
-                  <Link to={list.path}>{list.text}</Link>
+                  {item.path === "/logout" ? (
+                    // If logout button, render logout button
+                    <button className="btn1" onClick={handleLogout}>
+                      {item.text}
+                    </button>
+                  ) : user && item.path === "/add" ? (
+                    <Link to={item.path}>{item.text}</Link>
+                  ) : item.path !== "/add" ? (
+                    // If not logout button or add property link, render regular link
+                    <Link to={item.path}>{item.text}</Link>
+                  ) : (
+                    <p></p>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="button flex">
-            {loggedIn ? (
-              // If logged in, show profile and logout buttons
-              <>
-                <button className="btn1">
-                  <Link to="/profile">Profile</Link>
-                </button>
-                <button className="btn1" onClick={handleLogout}>
-                  Logout
-                </button>
-              </>
-            ) : (
-              // If not logged in, show login and signup links
-              <>
-                <button className="btn1">
-                  <Link to="/login" onClick={handleLogin}>
-                    Login
-                  </Link>
-                </button>
-                <button className="btn1">
-                  <Link to="/signup">Signup</Link>
-                </button>
-              </>
-            )}
-          </div>
-
           <div className="toggle">
             <button onClick={() => setNavList(!navList)}>
               {navList ? (
