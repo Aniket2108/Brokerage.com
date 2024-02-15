@@ -14,7 +14,7 @@ INSERT INTO users (email, password, name, contact_number, profile_picture, prope
 ('rahul.verma@example.com', 'password234', 'Rahul Verma', '+91 4444444444', NULL, NULL);
 
 -- Sample Data for Cities Table
-INSERT INTO cities (city_name) VALUES
+INSERT INTO city (city_name) VALUES
 ('Pune'),
 ('Mumbai'),
 ('Delhi'),
@@ -25,7 +25,7 @@ INSERT INTO cities (city_name) VALUES
 ('Ahmedabad');
 
 -- Sample Data for Areas Table
-INSERT INTO areas (area_name, city_id) VALUES
+INSERT INTO area (area_name, city_id) VALUES
 ('Kothrud', 1),
 ('Bandra', 2),
 ('Connaught Place', 3),

@@ -1,7 +1,49 @@
-import React from "react"
-import { price } from "../../data/Data"
+import React from "react";
+import { price } from "../../data/Data";
 
 const PriceCard = () => {
+  const createOrder = async (price) => {
+    try {
+      const response = await fetch('http://localhost:8080/users/create_order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ price: price })
+    });
+      const data = await response.json();
+      return data.id;
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
+  };
+
+  const handlePayment = async (price) => {
+    try {
+      const order = await createOrder(price);
+      const options = {
+        key: "rzp_test_c3HAknCruxSgid", 
+        amount: price * 100, 
+        name: 'Smart Payment Method',
+        theme: {color: '#F37254'},
+        currency: "INR",
+        order_id: order,
+        handler: function (response) {
+          rzp.close();
+        },
+        prefill: {
+          name: "",
+          email: "",
+          contact: "",
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.error("Error handling payment:", error);
+    }
+  };
+
   return (
     <>
       <div className='content flex mtop'>
@@ -18,24 +60,23 @@ const PriceCard = () => {
             <p>{item.ptext}</p>
 
             <ul>
-              {item.list.map((val) => {
-                const { icon, text, change } = val
-                return (
-                  <li>
-                    <label
-                      style={{
-                        background: change === "color" ? "#dc35451f" : "#27ae601f",
-                        color: change === "color" ? "#dc3848" : "#27ae60",
-                      }}
-                    >
-                      {icon}
-                    </label>
-                    <p>{text}</p>
-                  </li>
-                )
-              })}
+              {item.list.map((val, idx) => (
+                <li key={idx}>
+                  <label
+                    style={{
+                      background: val.change === "color" ? "#dc35451f" : "#27ae601f",
+                      color: val.change === "color" ? "#dc3848" : "#27ae60",
+                    }}
+                  >
+                    {val.icon}
+                  </label>
+                  <p>{val.text}</p>
+                </li>
+              ))}
             </ul>
             <button
+              id="payment_field"
+              onClick={() => handlePayment(item.price)}
               className='btn5'
               style={{
                 background: item.plan === "Standard" ? "#27ae60" : "#fff",
@@ -48,7 +89,8 @@ const PriceCard = () => {
         ))}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PriceCard
+export default PriceCard;
+
