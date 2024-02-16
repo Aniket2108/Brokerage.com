@@ -11,7 +11,6 @@ import com.rentup.RentUp.services.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/users")
+@RequestMapping("/users") 
 public class UserController {
 
 	@Autowired
@@ -31,12 +30,17 @@ public class UserController {
 		return ResponseEntity.ok(userService.getAllUsers()) ;
 	}
 
-	@PostMapping(value = "/register",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO,@RequestPart(name = "userProfilePicture",required = false) MultipartFile userProfilePicture) throws Exception {
 
-		UserDTO newUser = userService.addUser(userDTO,userProfilePicture);
+	@PostMapping(value = "/register" )
+	public ResponseEntity<?> addUser(@RequestBody UserDTO userDTO) throws Exception {
+		System.out.println("from register"+ userDTO);
+	
+		UserDTO newUser = userService.addUser(userDTO);
+
 		if (newUser != null) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+			System.out.println("Added new user"+newUser);
+			return ResponseEntity.status(HttpStatus.OK).body(newUser);
+			
 		} else {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
@@ -82,5 +86,16 @@ public class UserController {
 		return create.toString();
 	}
 
+
+	@GetMapping("/subscription_type/{mobileNumber}")
+	public String getSubsricptionType(@PathVariable String mobileNumber){
+		return userService.getSubscriptionType(mobileNumber);
+	}
+
+
+	@PutMapping("/subscription/{mobileNumber}/{planType}")
+	public ResponseEntity<?> updateSubscription(@PathVariable String mobileNumber,@PathVariable String planType){
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.updateSubscription(mobileNumber,planType));
+	}
 
 }

@@ -418,6 +418,19 @@ export const teamMembers = [
     return [];
   }
 };
+// <<<<<<< HEAD
+
+export const getAllProperties = async () => {
+  try {
+    const response = await axios.get(`http://localhost:8080/properties`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    return [];
+  }
+};
+// =======
+// >>>>>>> f456e7f4f54e37ad80266a6f1c26655dc7150db5
   
 
 
