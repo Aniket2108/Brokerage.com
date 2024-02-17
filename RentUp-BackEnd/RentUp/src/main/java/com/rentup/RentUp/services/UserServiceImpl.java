@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
 		imageService.uploadImage(user, image);
 		user.setPropertiesLeft(5);
-		user.setSubscriptionType("GOLD");
 		User savedUser = userRepository.save(user);
 		
 		return mapper.map(savedUser, UserDTO.class);
