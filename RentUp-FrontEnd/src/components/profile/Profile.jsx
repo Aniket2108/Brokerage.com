@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../common/UserProvider";
 import axios from "axios";
-import "./Profile.css"; // Import the CSS file
+import "./Profile.css"; 
 
 const Profile = () => {
   const { user, setUser } = useUser();
-  let isSubsValid = axios.get(`http://localhost:8080/users/subscription_type/${user.contactNumber}`);
   const [formData, setFormData] = useState({
     userEmail: user.email,
     userName: user.name,

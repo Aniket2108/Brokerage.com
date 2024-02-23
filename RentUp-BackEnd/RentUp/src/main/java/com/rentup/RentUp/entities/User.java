@@ -1,11 +1,16 @@
 package com.rentup.RentUp.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import lombok.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -28,9 +33,9 @@ public class User {
     @Column(name = "contact_number", nullable = false, length = 20)
     private String contactNumber;
 
-    @Lob
-    @Column(name = "profile_picture")
-    private String profilePicture;
+    
+//    @Column(name = "profile_picture")
+//    private String profilePicture;
 
     @Column(name = "properties_left")
     private Integer propertiesLeft;
@@ -39,22 +44,8 @@ public class User {
     private String subscriptionType;
 
     @Column(name ="subscription_start_date")
-    private Date subscriptionStartDate = null;
+    private Date subscriptionStartDate = Date.valueOf(LocalDate.now().minusDays(5));
 
     @Column(name ="subscription_end_date")
-    private Date subscriptionEndDate=null;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_visited_properties",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "property_id")
-    )
-    private List<Property> visitedProperties = new ArrayList<>();
-
-
-    public void addPropertyVisited(Property property){
-        visitedProperties.add(property);
-    }
-
+    private Date subscriptionEndDate=Date.valueOf(LocalDate.now().minusDays(5));
 }
