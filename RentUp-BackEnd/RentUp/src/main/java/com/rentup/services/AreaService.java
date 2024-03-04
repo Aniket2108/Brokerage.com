@@ -1,4 +1,4 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
 import java.util.List;
 

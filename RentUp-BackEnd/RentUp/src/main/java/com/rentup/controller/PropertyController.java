@@ -1,10 +1,10 @@
-package com.rentup.RentUp.controller;
+package com.rentup.controller;
 
 import java.util.List;
 
-import com.rentup.RentUp.dto.PropertyDTO;
-import com.rentup.RentUp.request.PropertyRequest;
-import com.rentup.RentUp.services.PropertyService;
+import com.rentup.dto.PropertyDTO;
+import com.rentup.request.PropertyRequest;
+import com.rentup.services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

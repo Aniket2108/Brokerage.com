@@ -1,7 +1,7 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
-import com.rentup.RentUp.entities.City;
-import com.rentup.RentUp.repository.CityRepository;
+import com.rentup.entities.City;
+import com.rentup.repository.CityRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

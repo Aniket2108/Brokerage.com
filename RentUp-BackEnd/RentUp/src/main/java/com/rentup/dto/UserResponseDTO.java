@@ -1,4 +1,4 @@
-package com.rentup.RentUp.dto;
+package com.rentup.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

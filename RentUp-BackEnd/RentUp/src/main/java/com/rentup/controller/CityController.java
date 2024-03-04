@@ -1,6 +1,6 @@
-package com.rentup.RentUp.controller;
+package com.rentup.controller;
 
-import com.rentup.RentUp.services.CityService;
+import com.rentup.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

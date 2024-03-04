@@ -1,17 +1,16 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
 import java.io.IOException;
 import java.util.List;
 
+import com.rentup.dto.UserDTO;
+import com.rentup.entities.User;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rentup.RentUp.dto.UserDTO;
-import com.rentup.RentUp.entities.User;
-import com.rentup.RentUp.request.UserSignUpRequest;
 
 
 public interface UserService {
-	UserDTO addUser(UserSignUpRequest request ) throws Exception ;
+	UserDTO addUser(UserDTO userObject, MultipartFile profilePicture) throws Exception ;
 	UserDTO loginUser(String mobileNumber, String password) throws IOException, Exception;
 
 	User findById(Integer userId);
@@ -25,5 +24,7 @@ public interface UserService {
 	Boolean getUserByMobileNumber(String mobileNumber);
 
 	Boolean changePassword(String mobileNumber,String newPass);
+
+	byte[] getProfilePicture(String mobileNumber);
 }
 

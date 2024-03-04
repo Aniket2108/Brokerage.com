@@ -1,13 +1,13 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
-import com.rentup.RentUp.dto.UserDTO;
-import com.rentup.RentUp.entities.Property;
-import com.rentup.RentUp.entities.PropertyVisit;
-import com.rentup.RentUp.entities.User;
-import com.rentup.RentUp.repository.PropertyRepository;
-import com.rentup.RentUp.repository.PropertyVisitRepository;
-import com.rentup.RentUp.repository.UserRepository;
 
+import com.rentup.dto.UserDTO;
+import com.rentup.entities.Property;
+import com.rentup.entities.PropertyVisit;
+import com.rentup.entities.User;
+import com.rentup.repository.PropertyRepository;
+import com.rentup.repository.PropertyVisitRepository;
+import com.rentup.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

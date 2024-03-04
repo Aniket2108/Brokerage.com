@@ -1,4 +1,4 @@
-package com.rentup.RentUp.mapper;
+package com.rentup.mapper;
 
 import java.io.File;
 import java.io.IOException;

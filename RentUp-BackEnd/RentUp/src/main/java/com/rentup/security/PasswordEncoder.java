@@ -1,4 +1,4 @@
-package com.rentup.RentUp.security;
+package com.rentup.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

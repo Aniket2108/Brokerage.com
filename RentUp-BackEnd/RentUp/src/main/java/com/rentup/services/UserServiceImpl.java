@@ -1,21 +1,21 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.rentup.dto.UserDTO;
+import com.rentup.entities.User;
+import com.rentup.entities.UserProfilePicture;
+import com.rentup.repository.UserProfilePictureRepository;
+import com.rentup.repository.UserRepository;
+import com.rentup.security.PasswordEncoder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rentup.RentUp.dto.UserDTO;
-import com.rentup.RentUp.entities.User;
-import com.rentup.RentUp.repository.UserRepository;
-import com.rentup.RentUp.request.ChangePasswordRequest;
-import com.rentup.RentUp.request.UserSignUpRequest;
-import com.rentup.RentUp.security.PasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,10 +27,15 @@ public class UserServiceImpl implements UserService {
 	private ModelMapper mapper;
 
 	@Autowired
+	private UserProfilePictureRepository userProfilePictureRepository;
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private UserProfilePictureRepository profilePictureRepository;
+
 	@Override
-	public UserDTO addUser(UserSignUpRequest request) throws Exception {
+	public UserDTO addUser(UserDTO request, MultipartFile profilePicture) throws Exception {
 		
 		User userByMobile  = userRepository.findByContactNumber(request.getContactNumber());
 		
@@ -40,11 +45,16 @@ public class UserServiceImpl implements UserService {
 
 		User user = mapper.map(request, User.class);
 
+		UserProfilePicture profilePicture1 = new UserProfilePicture();
+
+		profilePicture1.setUser(user);
+		profilePicture1.setContent(profilePicture.getBytes());
+
 		user.setPassword(passwordEncoder.encodePassword(user.getPassword()));
 
 		user.setPropertiesLeft(5);
 		User savedUser = userRepository.save(user);
-
+		userProfilePictureRepository.save(profilePicture1);
 		return mapper.map(savedUser, UserDTO.class);
 		}
 		else {
@@ -52,7 +62,7 @@ public class UserServiceImpl implements UserService {
 				throw new Exception("Email already exists!!!");
 			}
 			if(userByMobile !=null) {
-				throw new Exception("Mobile number already existes!!!!!");
+				throw new Exception("Mobile number already exists!!!!!");
 			}
 			return null;
 		}
@@ -60,14 +70,25 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDTO loginUser(String mobileNumber, String password) throws IOException, Exception {
-		System.out.println(passwordEncoder.encodePassword("Pass@123"));
 		User user = userRepository.findByContactNumber(mobileNumber);
-		
+
 		if (user != null && passwordEncoder.verifyPassword(password, user.getPassword())) {
-			return mapper.map(user, UserDTO.class);
+			UserDTO returning = mapper.map(user, UserDTO.class);
+//			UserProfilePicture profilePicture = profilePictureRepository.findByUser(user);
+//			returning.setProfilePicture(profilePicture.getContent());
+			return returning;
 		}
 		return null; // Login failed
 	}
+
+	@Override
+	public byte[] getProfilePicture(String mobileNumber) {
+		User user = userRepository.findByContactNumber(mobileNumber);
+		UserProfilePicture profilePicture = profilePictureRepository.findByUser(user);
+		System.out.println("Hello");
+		return profilePicture.getContent();
+	}
+
 
 //	@Override
 //    public boolean changePassword(ChangePasswordRequest request) {
@@ -191,5 +212,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(userEntity);
 		return true;
 	}
+
+
 
 }

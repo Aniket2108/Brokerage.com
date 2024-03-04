@@ -1,12 +1,7 @@
-package com.rentup.RentUp.entities;
+package com.rentup.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import com.rentup.entities.UserProfilePicture;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
@@ -33,9 +28,7 @@ public class User {
     @Column(name = "contact_number", nullable = false, length = 20)
     private String contactNumber;
 
-    
-    // @Column(name = "profile_picture")
-    // private String profilePicture;
+
 
     @Column(name = "properties_left")
     private Integer propertiesLeft;
@@ -48,4 +41,7 @@ public class User {
 
     @Column(name ="subscription_end_date")
     private Date subscriptionEndDate=Date.valueOf(LocalDate.now().minusDays(5));
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL ,orphanRemoval = true)
+    private UserProfilePicture profilePicture;
 }

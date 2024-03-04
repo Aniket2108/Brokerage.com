@@ -1,7 +1,7 @@
-package com.rentup.RentUp.controller;
+package com.rentup.controller;
 
-import com.rentup.RentUp.request.PropertyVisitRequest;
-import com.rentup.RentUp.services.PropertyVisitService;
+import com.rentup.request.PropertyVisitRequest;
+import com.rentup.services.PropertyVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

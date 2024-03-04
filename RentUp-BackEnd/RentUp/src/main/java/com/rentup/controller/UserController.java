@@ -1,30 +1,20 @@
-package com.rentup.RentUp.controller;
+package com.rentup.controller;
 
 import java.io.IOException;
 
+import com.rentup.dto.UserDTO;
+import com.rentup.request.UserLoginRequest;
+import com.rentup.services.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
-import com.rentup.RentUp.dto.UserDTO;
-import com.rentup.RentUp.request.UserLoginRequest;
-import com.rentup.RentUp.request.UserSignUpRequest;
-import com.rentup.RentUp.services.UserService;
 
 
 
@@ -45,26 +35,39 @@ public class UserController {
 	}
 
 
-	@PostMapping(value = "/register")
-	public ResponseEntity<?> addUser(@RequestBody UserSignUpRequest request) throws Exception {
-		
-	
-		
+	@PostMapping(value = "/register", consumes = "multipart/form-data")
+	public ResponseEntity<?> addUser(
+			@RequestPart("name") String name,@RequestPart("email") String email
+			,@RequestPart("password") String password,
+			@RequestPart("contactNumber") String contactNumber,
+			@RequestPart("profilePicture") MultipartFile profilePicture
+	) throws Exception {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setName(name);
+			userDTO.setPassword(password);
+			userDTO.setEmail(email);
+			userDTO.setContactNumber(contactNumber);
 			return ResponseEntity.
 					status(HttpStatus.CREATED).
-					body(userService.addUser(request));
-			
-		
+					body(userService.addUser(userDTO,profilePicture));
+
+	}
+
+
+	@GetMapping(value = "/profile/{mobileNumber}"
+//			, produces = { IMAGE_GIF_VALUE, IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE }
+	)
+	public ResponseEntity<?> getProfilePicture(@PathVariable String mobileNumber){
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getProfilePicture(mobileNumber));
 	}
 	
-	
 
-	@PostMapping("/login")
+	@PostMapping(value = "/login")
 	public ResponseEntity<?> loginUser(@RequestBody UserLoginRequest loginRequest) throws IOException, Exception {
 		UserDTO user = userService.loginUser(loginRequest.getMobileNumber(), loginRequest.getPassword());
-		System.out.println(user);
+//		System.out.println(user);
 		if (user != null) {
-			System.out.println(user);
+//			System.out.println(user);
 			return ResponseEntity.ok(user);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

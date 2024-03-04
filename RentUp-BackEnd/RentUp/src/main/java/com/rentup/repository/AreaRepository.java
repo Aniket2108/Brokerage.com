@@ -1,7 +1,7 @@
-package com.rentup.RentUp.repository;
+package com.rentup.repository;
 
-import com.rentup.RentUp.entities.Area;
-import com.rentup.RentUp.entities.City;
+import com.rentup.entities.Area;
+import com.rentup.entities.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

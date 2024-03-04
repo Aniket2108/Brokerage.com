@@ -1,4 +1,4 @@
-package com.rentup.RentUp.dto;
+package com.rentup.dto;
 
 import java.sql.Date;
 
@@ -14,7 +14,7 @@ public class UserDTO {
     private Integer propertiesLeft;
     private String subscriptionType;
     private Date subscriptionEndDate;
-
+    private byte[] profilePicture;
 
 }
 

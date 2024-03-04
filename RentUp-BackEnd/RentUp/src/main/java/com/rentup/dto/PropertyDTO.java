@@ -1,7 +1,7 @@
-package com.rentup.RentUp.dto;
+package com.rentup.dto;
 
 
-import com.rentup.RentUp.entities.*;
+import com.rentup.entities.*;
 import lombok.Data;
 
 import java.util.List;

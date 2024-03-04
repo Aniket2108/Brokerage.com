@@ -1,6 +1,6 @@
-package com.rentup.RentUp.repository;
+package com.rentup.repository;
 
-import com.rentup.RentUp.entities.User;
+import com.rentup.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

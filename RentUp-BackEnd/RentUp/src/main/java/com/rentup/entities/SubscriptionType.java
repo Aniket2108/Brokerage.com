@@ -1,4 +1,4 @@
-package com.rentup.RentUp.entities;
+package com.rentup.entities;
 
 public enum SubscriptionType {
     SILVER(199),

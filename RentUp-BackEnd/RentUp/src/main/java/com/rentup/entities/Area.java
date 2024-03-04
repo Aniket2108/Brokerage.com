@@ -1,4 +1,4 @@
-package com.rentup.RentUp.entities;
+package com.rentup.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

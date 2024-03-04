@@ -1,4 +1,4 @@
-package com.rentup.RentUp.request;
+package com.rentup.request;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
-import com.rentup.RentUp.dto.PropertyDTO;
-import com.rentup.RentUp.request.PropertyRequest;
+import com.rentup.dto.PropertyDTO;
+import com.rentup.request.PropertyRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

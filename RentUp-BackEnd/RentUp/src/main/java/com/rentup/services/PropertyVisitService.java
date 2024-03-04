@@ -1,8 +1,9 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
+
+import com.rentup.dto.UserDTO;
 
 import java.sql.Date;
 
-import com.rentup.RentUp.dto.UserDTO;
 
 public interface PropertyVisitService {
     UserDTO addVisit(Integer userId, Integer propertyId, Date date);

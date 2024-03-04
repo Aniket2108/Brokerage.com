@@ -1,11 +1,12 @@
-package com.rentup.RentUp.mapper;
+package com.rentup.mapper;
 
-import com.rentup.RentUp.dto.PropertyDTO;
-import com.rentup.RentUp.entities.FlatType;
-import com.rentup.RentUp.entities.Property;
-import com.rentup.RentUp.entities.PropertyStatus;
-import com.rentup.RentUp.entities.TenantType;
-import com.rentup.RentUp.request.PropertyRequest;
+
+import com.rentup.dto.PropertyDTO;
+import com.rentup.entities.FlatType;
+import com.rentup.entities.Property;
+import com.rentup.entities.PropertyStatus;
+import com.rentup.entities.TenantType;
+import com.rentup.request.PropertyRequest;
 import org.springframework.stereotype.Component;
 
 

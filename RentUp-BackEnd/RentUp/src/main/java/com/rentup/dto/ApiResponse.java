@@ -1,4 +1,4 @@
-package com.rentup.RentUp.dto;
+package com.rentup.dto;
 
 import java.time.LocalDateTime;
 

@@ -1,22 +1,22 @@
-package com.rentup.RentUp.services;
+package com.rentup.services;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.rentup.dto.PropertyDTO;
+import com.rentup.entities.Property;
+import com.rentup.entities.PropertyStatus;
+import com.rentup.entities.User;
+import com.rentup.mapper.PropertyMapper;
+import com.rentup.repository.AreaRepository;
+import com.rentup.repository.PropertyRepository;
+import com.rentup.repository.UserRepository;
+import com.rentup.request.PropertyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rentup.RentUp.dto.PropertyDTO;
-import com.rentup.RentUp.entities.Property;
-import com.rentup.RentUp.entities.PropertyStatus;
-import com.rentup.RentUp.entities.User;
-import com.rentup.RentUp.mapper.PropertyMapper;
-import com.rentup.RentUp.repository.AreaRepository;
-import com.rentup.RentUp.repository.PropertyRepository;
-import com.rentup.RentUp.repository.UserRepository;
-import com.rentup.RentUp.request.PropertyRequest;
 
 
 @Service
