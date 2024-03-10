@@ -3,6 +3,7 @@ package com.rentup.controller;
 import java.io.IOException;
 
 import com.rentup.dto.UserDTO;
+import com.rentup.repository.UserRepository;
 import com.rentup.request.UserLoginRequest;
 import com.rentup.services.UserService;
 import org.json.JSONObject;
@@ -25,6 +26,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRepository repo ;
 	
 
 	
@@ -33,14 +36,13 @@ public class UserController {
 	public ResponseEntity<?> getAllUsers(){
 		return ResponseEntity.ok(userService.getAllUsers()) ;
 	}
-
-
+	
 	@PostMapping(value = "/register", consumes = "multipart/form-data")
 	public ResponseEntity<?> addUser(
 			@RequestPart("name") String name,@RequestPart("email") String email
 			,@RequestPart("password") String password,
 			@RequestPart("contactNumber") String contactNumber,
-			@RequestPart("profilePicture") MultipartFile profilePicture
+			@RequestPart("profilePhoto") MultipartFile profilePicture
 	) throws Exception {
 			UserDTO userDTO = new UserDTO();
 			userDTO.setName(name);
@@ -50,13 +52,10 @@ public class UserController {
 			return ResponseEntity.
 					status(HttpStatus.CREATED).
 					body(userService.addUser(userDTO,profilePicture));
-
 	}
 
 
-	@GetMapping(value = "/profile/{mobileNumber}"
-//			, produces = { IMAGE_GIF_VALUE, IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE }
-	)
+	@GetMapping(value = "/profile/{mobileNumber}")
 	public ResponseEntity<?> getProfilePicture(@PathVariable String mobileNumber){
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getProfilePicture(mobileNumber));
 	}
@@ -77,6 +76,12 @@ public class UserController {
 	@GetMapping("/{mobileNumber}")
 	public ResponseEntity<?> getUserByMobileNumber(@PathVariable String mobileNumber){
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getUserByMobileNumber(mobileNumber));
+	}
+	
+	@GetMapping("/byId/{userId}")
+	public ResponseEntity<?> getUserById(@PathVariable int userId){
+		
+		return ResponseEntity.status(HttpStatus.OK).body(repo.findById(userId));
 	}
 
 	
@@ -104,7 +109,7 @@ public class UserController {
 		return userService.getSubscriptionType(mobileNumber);
 	}
 	
-	@PutMapping("/{userId}")
+	@PutMapping("{userId}")
 	public ResponseEntity<?> updateUserProfile(@PathVariable Integer userId,
 											   @RequestParam("userName") String userName,
 											   @RequestParam("userEmail") String userEmail
