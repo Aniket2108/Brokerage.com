@@ -27,11 +27,12 @@
 // ]
 
 import  axios   from "axios";
-import Aniket from "../images/customer/Aniket.jpg"
+
+export const serverUrl = "http://localhost:8080";
 
 export const getCities = async () => {
   try {
-    const response = await axios.get("http://localhost:8080/city/"); // Update the API endpoint
+    const response = await axios.get(`${serverUrl}/city/`); // Update the API endpoint
     return response.data;
   } catch (error) {
     console.error("Error fetching cities:", error);
@@ -66,10 +67,6 @@ export const getNavData = (user) => {
     path: "/property",
   },
     // Your other navigation items here
-    {
-      text: "Visits Requested",
-      path: "/visits",
-    },
     { text: user ? 'Logout' : 'Login', path: user? '/logout':'/login'},
     { text:user? 'Profile':'Sign up', path: user?'/profile':'/signup' },
   ];
@@ -429,7 +426,7 @@ export const teamMembers = [
   
   export const getAreas = async (city) => {
   try {
-    const response = await axios.get(`http://localhost:8080/area/${city}`); // Update the API endpoint for areas
+    const response = await axios.get(`${serverUrl}/area/${city}`); // Update the API endpoint for areas
     return response.data;
   } catch (error) {
     console.error(`Error fetching areas for ${city}:`, error);
@@ -440,7 +437,7 @@ export const teamMembers = [
 
 export const getAllProperties = async () => {
   try {
-    const response = await axios.get(`http://localhost:8080/properties`);
+    const response = await axios.get(`${serverUrl}/properties`);
     return response.data;
   } catch (error) {
     console.error("Error fetching properties:", error);
