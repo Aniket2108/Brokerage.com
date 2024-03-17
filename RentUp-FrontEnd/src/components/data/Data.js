@@ -28,7 +28,7 @@
 
 import  axios   from "axios";
 
-export const serverUrl = "http://51.21.67.53:8080";
+export const serverUrl = "https://51.21.67.53:8080";
 
 export const getCities = async () => {
   try {
