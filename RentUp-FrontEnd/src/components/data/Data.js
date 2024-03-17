@@ -28,7 +28,8 @@
 
 import  axios   from "axios";
 
-export const serverUrl = "http://localhost:8080";
+// export const serverUrl = "http://localhost:8080";
+export const serverUrl = "https://rentup-backend-production.up.railway.app";
 
 export const getCities = async () => {
   try {
