@@ -27,7 +27,6 @@
 // ]
 
 import  axios   from "axios";
-
 export const serverUrl = "http://51.21.67.53:8080";
 
 export const getCities = async () => {
@@ -181,7 +180,7 @@ export const awards = [
 export const location = [
   {
     id: 1,
-    name: "New Orleans, Louisiana",
+    name: "Mumbai",
     Villas: "12 Villas",
     Apartments: "10 Apartments",
     Offices: "07 Offices",
@@ -189,7 +188,7 @@ export const location = [
   },
   {
     id: 2,
-    name: "Jerrsy, United State",
+    name: "Pune",
     Villas: "12 Villas",
     Apartments: "10 Apartments",
     Offices: "07 Offices",
@@ -197,7 +196,7 @@ export const location = [
   },
   {
     id: 3,
-    name: "Liverpool, London",
+    name: "Delhi",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
@@ -205,7 +204,7 @@ export const location = [
   },
   {
     id: 4,
-    name: "NewYork, United States",
+    name: "Bangalore",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
@@ -213,7 +212,7 @@ export const location = [
   },
   {
     id: 5,
-    name: "Montreal, Canada",
+    name: "Kolkata",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",
@@ -221,7 +220,7 @@ export const location = [
   },
   {
     id: 6,
-    name: "California, USA",
+    name: "Chennai",
     Villas: "12 Villas",
     Apartments: " 10 Apartments",
     Offices: "07 Offices",

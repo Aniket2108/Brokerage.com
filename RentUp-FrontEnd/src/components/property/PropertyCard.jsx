@@ -118,7 +118,7 @@ const PropertyCard = ({ property, image }) => {
       )}
       <div className={`property-card ${showModal ? "blurred" : ""}`}>
         <div className="property-images">
-          <img className="property-image" src={image} alt="Property Image" style={{ width: "480px", height: "480px" }} />
+          <img className="property-image" src={image} alt="Property Image" style={{ width: "400px", height: "400px" }} />
         </div>
         <div className="property-details">
           <div>
